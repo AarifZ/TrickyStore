@@ -1,3 +1,4 @@
+# Android 10, 11 is supported in v1.2.0+ Official 🎉
 # Tricky Store
 
 A trick of keystore. **Android 10 or above is required**.
