@@ -13,11 +13,10 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 public class Utils {
     private final static String TAG = "Utils";
-    public static X509Certificate toCertificate(byte[] bytes) {
+    static X509Certificate toCertificate(byte[] bytes) {
         try {
             final CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
             return (X509Certificate) certFactory.generateCertificate(
@@ -29,7 +28,7 @@ public class Utils {
     }
 
     @SuppressWarnings("unchecked")
-    public static Collection<X509Certificate> toCertificates(byte[] bytes) {
+    private static Collection<X509Certificate> toCertificates(byte[] bytes) {
         try {
             final CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
             return (Collection<X509Certificate>) certFactory.generateCertificates(
@@ -37,31 +36,6 @@ public class Utils {
         } catch (CertificateException e) {
             Log.w(TAG, "Couldn't parse certificates in keystore", e);
             return new ArrayList<>();
-        }
-    }
-
-    public static byte[] toBytes(Collection<Certificate> certificates) {
-        try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            for (Certificate cert : certificates) {
-                byteArrayOutputStream.write(cert.getEncoded());
-            }
-            return byteArrayOutputStream.toByteArray();
-        } catch (Exception e) {
-            Log.w(TAG, "Couldn't getBytes certificates in keystore", e);
-            return null;
-        }
-    }
-    public static List<byte[]> toListBytes(Collection<Certificate> certificates) {
-        try {
-            List<byte[]> chain = new ArrayList<>();
-            for (Certificate cert : certificates) {
-                chain.add(cert.getEncoded());
-            }
-            return chain;
-        } catch (Exception e) {
-            Log.w(TAG, "Couldn't toListBytes certificates in keystore", e);
-            return null;
         }
     }
 
